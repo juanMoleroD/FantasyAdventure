@@ -1,6 +1,9 @@
 package game.players.weapons;
 
-public class Weapon {
+import game.behaviour.ILootable;
+import game.players.Player;
+
+public class Weapon implements ILootable {
     private String name;
     private int attackValue;
 
@@ -15,5 +18,15 @@ public class Weapon {
 
     public int getAttackValue() {
         return attackValue;
+    }
+
+    @Override
+    public boolean pickUp() {
+        return true;
+    }
+
+    @Override
+    public boolean tradeUp(Player player) {
+        return true;
     }
 }

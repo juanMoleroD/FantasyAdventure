@@ -1,6 +1,9 @@
 package game.players.spells;
 
-public class Spell {
+import game.behaviour.ILootable;
+import game.players.Player;
+
+public class Spell implements ILootable {
     private String name;
     private String type;
     private int attackValue;
@@ -21,5 +24,15 @@ public class Spell {
 
     public int getAttackValue() {
         return attackValue;
+    }
+
+    @Override
+    public boolean pickUp() {
+        return true;
+    }
+
+    @Override
+    public boolean tradeUp(Player player) {
+        return true;
     }
 }

@@ -23,13 +23,24 @@ public class Wizard extends Player implements IAttack {
     public CompanionCreature getCompanionCreature() {
         return companionCreature;
     }
+    public void changeCompanionCreature(CompanionCreature newCreature) {
+        this.companionCreature = newCreature;
+    }
 
     @Override
     public void attack(IHealth target) {
-        target.reduceHealth(10);
+        target.reduceHealth(spell.getAttackValue());
     }
 
     public void changeSpell(Spell spell) {
         this.spell = spell;
+    }
+
+    @Override
+    public void reduceHealth(int damageAmount) {
+        if (companionCreature.getHealth() > 0) {
+            companionCreature.reduceHealth(5);
+            this.health -= (damageAmount - 5);
+        }
     }
 }

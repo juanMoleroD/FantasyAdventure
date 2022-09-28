@@ -1,5 +1,7 @@
 package game.players.categories;
 
+import game.creatures.CompanionCreature;
+import game.creatures.categories.Dragon;
 import game.enemies.Enemy;
 import game.players.spells.Spell;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,8 +26,15 @@ class WizardTest {
     }
 
     @Test
-    void hasElemental() {
+    void hasCompanion() {
         assertEquals("Elemental", player.getCompanionCreature().getType());
+    }
+
+    @Test
+    void canChangeCompanion() {
+        CompanionCreature dragon = new Dragon();
+        player.changeCompanionCreature(dragon);
+        assertEquals("Dragon", player.getCompanionCreature().getType());
     }
 
     @Test
@@ -43,7 +52,9 @@ class WizardTest {
     }
 
     @Test
-    void SpellsHaveDifferentDamageValues() {
-
+    void companionProtectsPlayerTakingSomeOfTheDamage() {
+        enemy.attack(player);
+        assertEquals(95, player.getHealth());
+        assertEquals(25, player.getCompanionCreature().getHealth());
     }
 }
